@@ -39,7 +39,8 @@ def read_pdf_unstructured(input_path: Union[Path, str]):
         )
 
     page_items = defaultdict(list)
-    items = partition(input_path)
+    # Avoid libmagic: strategy 1 (content_type) runs before MIME sniffing in unstructured.
+    items = partition(input_path, content_type="application/pdf")
     for item in items:
         page_number = item.metadata.page_number
         bbox = points_to_bbox(item.metadata.coordinates.points)

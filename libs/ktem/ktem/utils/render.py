@@ -91,7 +91,7 @@ class Render:
         page_idx = int(doc.metadata.get("page_label", 1))
 
         if not is_pdf:
-            logger.warning("Document is not pdf")
+            logger.debug("Document is not pdf")
             return html_content
 
         if page_idx < 0:
